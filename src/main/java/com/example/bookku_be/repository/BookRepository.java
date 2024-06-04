@@ -9,4 +9,6 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findBookByMember(Member member);
+
+    Book findBookByBookIdAndMember(Long bookId, Member member);
 }
