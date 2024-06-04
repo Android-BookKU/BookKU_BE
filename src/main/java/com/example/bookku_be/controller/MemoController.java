@@ -1,7 +1,6 @@
 package com.example.bookku_be.controller;
 
 import com.example.bookku_be.config.UserDetailsImpl;
-import com.example.bookku_be.dto.ReqDto.BookReqDto;
 import com.example.bookku_be.dto.ReqDto.MemoReqDto;
 import com.example.bookku_be.dto.ResDto.GlobalResDto;
 import com.example.bookku_be.service.MemoService;
@@ -24,8 +23,8 @@ public class MemoController {
     }
 
     @GetMapping("/{bookId}")
-    public GlobalResDto<?> getAllMemo(@PathVariable Long bookId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public GlobalResDto<?> getAllMemo(@PathVariable Long bookId) {
 
-        return memoService.getAllMemo(bookId, userDetails);
+        return memoService.getAllMemo(bookId);
     }
 }

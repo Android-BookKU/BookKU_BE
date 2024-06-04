@@ -2,11 +2,9 @@ package com.example.bookku_be.service;
 
 import com.example.bookku_be.config.UserDetailsImpl;
 import com.example.bookku_be.domain.Book;
-import com.example.bookku_be.domain.Memo;
 import com.example.bookku_be.domain.Review;
 import com.example.bookku_be.dto.ReqDto.ReviewReqDto;
 import com.example.bookku_be.dto.ResDto.GlobalResDto;
-import com.example.bookku_be.dto.ResDto.MemoResDto;
 import com.example.bookku_be.dto.ResDto.ReviewResDto;
 import com.example.bookku_be.exception.CustomException;
 import com.example.bookku_be.exception.ErrorCode;
@@ -39,7 +37,7 @@ public class ReviewService {
     }
 
     @Transactional
-    public GlobalResDto<?> getAllReview(Long bookId, UserDetailsImpl userDetails) {
+    public GlobalResDto<?> getAllReview(Long bookId) {
 
         Book book = bookRepository.findById(bookId).orElseThrow(
                 ()-> new CustomException(ErrorCode.NOT_FOUND_BOOK)

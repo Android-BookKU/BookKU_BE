@@ -1,6 +1,5 @@
 package com.example.bookku_be.dto.ResDto;
 
-import com.example.bookku_be.domain.Memo;
 import com.example.bookku_be.domain.Review;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;

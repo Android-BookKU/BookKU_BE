@@ -1,6 +1,5 @@
 package com.example.bookku_be.domain;
 
-import com.example.bookku_be.dto.ReqDto.MemoReqDto;
 import com.example.bookku_be.dto.ReqDto.ReviewReqDto;
 import jakarta.persistence.*;
 import lombok.Getter;

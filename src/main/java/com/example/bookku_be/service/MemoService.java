@@ -4,7 +4,6 @@ import com.example.bookku_be.config.UserDetailsImpl;
 import com.example.bookku_be.domain.Book;
 import com.example.bookku_be.domain.Memo;
 import com.example.bookku_be.dto.ReqDto.MemoReqDto;
-import com.example.bookku_be.dto.ResDto.BookResDto;
 import com.example.bookku_be.dto.ResDto.GlobalResDto;
 import com.example.bookku_be.dto.ResDto.MemoResDto;
 import com.example.bookku_be.exception.CustomException;
@@ -38,7 +37,7 @@ public class MemoService {
     }
 
     @Transactional
-    public GlobalResDto<?> getAllMemo(Long bookId, UserDetailsImpl userDetails) {
+    public GlobalResDto<?> getAllMemo(Long bookId) {
 
         Book book = bookRepository.findById(bookId).orElseThrow(
                 ()-> new CustomException(ErrorCode.NOT_FOUND_BOOK)

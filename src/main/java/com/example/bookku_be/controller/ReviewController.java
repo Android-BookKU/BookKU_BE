@@ -1,10 +1,8 @@
 package com.example.bookku_be.controller;
 
 import com.example.bookku_be.config.UserDetailsImpl;
-import com.example.bookku_be.dto.ReqDto.MemoReqDto;
 import com.example.bookku_be.dto.ReqDto.ReviewReqDto;
 import com.example.bookku_be.dto.ResDto.GlobalResDto;
-import com.example.bookku_be.service.MemoService;
 import com.example.bookku_be.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -25,8 +23,8 @@ public class ReviewController {
     }
 
     @GetMapping("/{bookId}")
-    public GlobalResDto<?> getAllReview(@PathVariable Long bookId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public GlobalResDto<?> getAllReview(@PathVariable Long bookId) {
 
-        return reviewService.getAllReview(bookId, userDetails);
+        return reviewService.getAllReview(bookId);
     }
 }
