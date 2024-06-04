@@ -22,4 +22,10 @@ public class MemoController {
 
         return memoService.addMemo(bookId, memoReqDto, userDetails);
     }
+
+    @GetMapping("/{bookId}")
+    public GlobalResDto<?> getAllMemo(@PathVariable Long bookId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+        return memoService.getAllMemo(bookId, userDetails);
+    }
 }

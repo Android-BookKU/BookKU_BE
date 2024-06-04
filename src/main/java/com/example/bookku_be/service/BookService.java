@@ -35,19 +35,12 @@ public class BookService {
     @Transactional
     public GlobalResDto<?> getAllBook(UserDetailsImpl userDetails) {
 
-        try {
-            Member member = userDetails.getMember();
-            List<Book> bookList = bookRepository.findBookByMember(member);
+        Member member = userDetails.getMember();
+        List<Book> bookList = bookRepository.findBookByMember(member);
 
-            List<BookResDto> bookResDtoList = bookList.stream()
-                    .map(BookResDto::new).toList();
+        List<BookResDto> bookResDtoList = bookList.stream()
+                .map(BookResDto::new).toList();
 
-            return GlobalResDto.success(bookResDtoList, "success read books");
-        } catch (Exception e) {
-            logger.error("Failed to read books", e);
-            return GlobalResDto.fail("Failed to read books");
-        }
+        return GlobalResDto.success(bookResDtoList, "success read books");
     }
-
-
 }
