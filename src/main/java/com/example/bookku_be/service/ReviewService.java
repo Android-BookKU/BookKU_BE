@@ -26,7 +26,6 @@ public class ReviewService {
 
     @Transactional
     public GlobalResDto<?> addReview(Long bookId, ReviewReqDto reviewReqDto, UserDetailsImpl userDetails) {
-
         Book book = bookRepository.findById(bookId).orElseThrow(
                 ()-> new CustomException(ErrorCode.NOT_FOUND_BOOK)
         );
@@ -40,6 +39,18 @@ public class ReviewService {
         reviewRepository.save(review);
 
         return GlobalResDto.success(null, "success create review");
+    }
+
+    @Transactional
+    public GlobalResDto<?> checkReview(Long bookId, UserDetailsImpl userDetails) {
+        Book book = bookRepository.findById(bookId).orElseThrow(
+                ()-> new CustomException(ErrorCode.NOT_FOUND_BOOK)
+        );
+
+        Optional<Review> existingReview = reviewRepository.findByBookAndMember(book, userDetails.getMember());
+        boolean check = existingReview.isEmpty();
+
+        return GlobalResDto.success(check, "success check review");
     }
 
     @Transactional

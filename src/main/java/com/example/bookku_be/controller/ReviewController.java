@@ -22,6 +22,12 @@ public class ReviewController {
         return reviewService.addReview(bookId, reviewReqDto, userDetails);
     }
 
+    @GetMapping("/{bookId}/haswritten")
+    public GlobalResDto<?> checkReview(@PathVariable Long bookId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+        return reviewService.checkReview(bookId, userDetails);
+    }
+
     @GetMapping("/{bookId}")
     public GlobalResDto<?> getAllReview(@PathVariable Long bookId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
