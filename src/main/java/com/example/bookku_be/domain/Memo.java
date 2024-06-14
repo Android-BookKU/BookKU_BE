@@ -32,4 +32,8 @@ public class Memo {
         this.book = book;
         this.member = member;
     }
+
+    public void updateMemo(MemoReqDto memoReqDto) {
+        this.content = memoReqDto.getContent();
+    }
 }

@@ -23,10 +23,10 @@ public class MemoController {
     }
 
     @PutMapping("/{bookId}/{memoId}")
-    public GlobalResDto<?> updateMemo(@PathVariable Long bookId, @PathVariable Long memoId,
+    public GlobalResDto<?> updateMemo(@PathVariable Long bookId, @PathVariable Long memoId, @RequestBody MemoReqDto memoReqDto,
                                       @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
-        return memoService.updateMemo(bookId, memoId, userDetails);
+        return memoService.updateMemo(bookId, memoId, memoReqDto, userDetails);
     }
 
     @DeleteMapping("/{bookId}/{memoId}")

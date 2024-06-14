@@ -25,7 +25,6 @@ public class MemoService {
 
     @Transactional
     public GlobalResDto<?> addMemo(Long bookId, MemoReqDto memoReqDto, UserDetailsImpl userDetails) {
-
         Book book = bookRepository.findById(bookId).orElseThrow(
                 ()-> new CustomException(ErrorCode.NOT_FOUND_BOOK)
         );
@@ -37,18 +36,43 @@ public class MemoService {
     }
 
     @Transactional
-    public GlobalResDto<?> updateMemo(Long bookId, Long memoId, UserDetailsImpl userDetails) {
+    public GlobalResDto<?> updateMemo(Long bookId, Long memoId, MemoReqDto memoReqDto, UserDetailsImpl userDetails) {
+        Book book = bookRepository.findById(bookId).orElseThrow(
+                ()-> new CustomException(ErrorCode.NOT_FOUND_BOOK)
+        );
 
+        if (!book.getMember().getMemberId().equals(userDetails.getMember().getMemberId())) {
+            throw new CustomException(ErrorCode.NOT_MATCH_MEMBER);
+        }
+
+        Memo memo = memoRepository.findById(memoId).orElseThrow(
+                ()-> new CustomException(ErrorCode.NOT_FOUND_MEMO)
+        );
+        memo.updateMemo(memoReqDto);
+
+        return GlobalResDto.success(null, "success update memo");
     }
 
     @Transactional
     public GlobalResDto<?> deleteMemo(Long bookId, Long memoId, UserDetailsImpl userDetails) {
+        Book book = bookRepository.findById(bookId).orElseThrow(
+                ()-> new CustomException(ErrorCode.NOT_FOUND_BOOK)
+        );
 
+        if (!book.getMember().getMemberId().equals(userDetails.getMember().getMemberId())) {
+            throw new CustomException(ErrorCode.NOT_MATCH_MEMBER);
+        }
+
+        Memo memo = memoRepository.findById(memoId).orElseThrow(
+                ()-> new CustomException(ErrorCode.NOT_FOUND_MEMO)
+        );
+        memoRepository.deleteById(memoId);
+
+        return GlobalResDto.success(null, "success delete memo");
     }
 
     @Transactional
     public GlobalResDto<?> getAllMemo(Long bookId) {
-
         Book book = bookRepository.findById(bookId).orElseThrow(
                 ()-> new CustomException(ErrorCode.NOT_FOUND_BOOK)
         );

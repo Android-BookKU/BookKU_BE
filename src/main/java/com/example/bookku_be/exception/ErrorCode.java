@@ -16,6 +16,8 @@ public enum ErrorCode {
 //    DELETED_USER_EXCEPTION(HttpStatus.BAD_REQUEST.value(), "M002", "이미 탈퇴한 계정입니다.\n다른 계정으로 시도해 주세요."),
     NOT_FOUND_BOOK(HttpStatus.NOT_FOUND.value(), "B001", "책을 찾을 수 없습니다."),
 
+    NOT_FOUND_MEMO(HttpStatus.NOT_FOUND.value(), "MEMO001", "메모를 찾을 수 없습니다."),
+
     ALREADY_REVIEWED_BOOK(HttpStatus.BAD_REQUEST.value(), "R001", "이미 리뷰가 존재합니다."),
 
     ERROR(HttpStatus.NO_CONTENT.value(), "S001", "알수없는오류");
