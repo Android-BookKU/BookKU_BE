@@ -21,6 +21,13 @@ public class BookController {
         return bookService.addBook(bookReqDto, userDetails);
     }
 
+    @DeleteMapping("/{bookId}")
+    public GlobalResDto<?> deleteBook(@PathVariable Long bookId, @AuthenticationPrincipal UserDetailsImpl userDetails){
+
+        return bookService.deleteBook(bookId, userDetails);
+    }
+
+
     @GetMapping("")
     public GlobalResDto<?> getAllBook(@AuthenticationPrincipal UserDetailsImpl userDetails){
 
