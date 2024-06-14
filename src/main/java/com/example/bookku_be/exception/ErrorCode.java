@@ -17,6 +17,8 @@ public enum ErrorCode {
 
     NOT_FOUND_BOOK(HttpStatus.NOT_FOUND.value(), "B001", "책을 찾을 수 없습니다."),
 
+    ALREADY_REVIEWED_BOOK(HttpStatus.BAD_REQUEST.value(), "R001", "이미 리뷰가 존재합니다."),
+
     ERROR(HttpStatus.NO_CONTENT.value(), "S001", "알수없는오류");
 
 

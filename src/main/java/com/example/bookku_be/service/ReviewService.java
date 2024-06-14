@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -29,6 +30,11 @@ public class ReviewService {
         Book book = bookRepository.findById(bookId).orElseThrow(
                 ()-> new CustomException(ErrorCode.NOT_FOUND_BOOK)
         );
+
+        Optional<Review> existingReview = reviewRepository.findByBookAndMember(book, userDetails.getMember());
+        if (existingReview.isPresent()) {
+            throw new CustomException(ErrorCode.ALREADY_REVIEWED_BOOK);
+        }
 
         Review review = new Review(reviewReqDto, book, userDetails.getMember());
         reviewRepository.save(review);
