@@ -23,7 +23,7 @@ public class MemoController {
     }
 
     @GetMapping("/{bookId}")
-    public GlobalResDto<?> getAllMemo(@PathVariable Long bookId) {
+    public GlobalResDto<?> getAllMemo(@PathVariable Long bookId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         return memoService.getAllMemo(bookId);
     }

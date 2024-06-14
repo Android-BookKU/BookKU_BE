@@ -23,7 +23,7 @@ public class ReviewController {
     }
 
     @GetMapping("/{bookId}")
-    public GlobalResDto<?> getAllReview(@PathVariable Long bookId) {
+    public GlobalResDto<?> getAllReview(@PathVariable Long bookId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
         return reviewService.getAllReview(bookId);
     }
