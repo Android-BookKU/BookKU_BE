@@ -37,6 +37,16 @@ public class MemoService {
     }
 
     @Transactional
+    public GlobalResDto<?> updateMemo(Long bookId, Long memoId, UserDetailsImpl userDetails) {
+
+    }
+
+    @Transactional
+    public GlobalResDto<?> deleteMemo(Long bookId, Long memoId, UserDetailsImpl userDetails) {
+
+    }
+
+    @Transactional
     public GlobalResDto<?> getAllMemo(Long bookId) {
 
         Book book = bookRepository.findById(bookId).orElseThrow(

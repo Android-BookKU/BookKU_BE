@@ -3,12 +3,14 @@ package com.example.bookku_be.service;
 import com.example.bookku_be.config.UserDetailsImpl;
 import com.example.bookku_be.domain.Book;
 import com.example.bookku_be.domain.Member;
+import com.example.bookku_be.domain.Memo;
 import com.example.bookku_be.dto.ReqDto.BookReqDto;
 import com.example.bookku_be.dto.ResDto.BookResDto;
 import com.example.bookku_be.dto.ResDto.GlobalResDto;
 import com.example.bookku_be.exception.CustomException;
 import com.example.bookku_be.exception.ErrorCode;
 import com.example.bookku_be.repository.BookRepository;
+import com.example.bookku_be.repository.MemoRepository;
 import lombok.RequiredArgsConstructor;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
@@ -22,6 +24,7 @@ import java.util.List;
 public class BookService {
 
     private final BookRepository bookRepository;
+    private final MemoRepository memoRepository;
 //    private final Logger logger = LoggerFactory.getLogger(BookService.class);
 
     @Transactional
@@ -40,7 +43,15 @@ public class BookService {
                 ()-> new CustomException(ErrorCode.NOT_FOUND_BOOK)
         );
 
+        // 책의 작성자와 현재 사용자가 일치하는지 확인
+        if (!book.getMember().getMemberId().equals(userDetails.getMember().getMemberId())) {
+            throw new CustomException(ErrorCode.NOT_MATCH_MEMBER);
+        }
+
         bookRepository.deleteById(bookId);
+
+        List<Memo> memoList = memoRepository.findMemoByBook(book);
+        memoRepository.deleteAll(memoList);
 
         return GlobalResDto.success(null, "success delete book");
     }

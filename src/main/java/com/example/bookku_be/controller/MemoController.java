@@ -22,6 +22,20 @@ public class MemoController {
         return memoService.addMemo(bookId, memoReqDto, userDetails);
     }
 
+    @PutMapping("/{bookId}/{memoId}")
+    public GlobalResDto<?> updateMemo(@PathVariable Long bookId, @PathVariable Long memoId,
+                                      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+        return memoService.updateMemo(bookId, memoId, userDetails);
+    }
+
+    @DeleteMapping("/{bookId}/{memoId}")
+    public GlobalResDto<?> deleteMemo(@PathVariable Long bookId, @PathVariable Long memoId,
+                                      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+        return memoService.deleteMemo(bookId, memoId, userDetails);
+    }
+
     @GetMapping("/{bookId}")
     public GlobalResDto<?> getAllMemo(@PathVariable Long bookId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
 
