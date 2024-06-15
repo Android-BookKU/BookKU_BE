@@ -14,4 +14,6 @@ public class BookReqDto {
     String title;
     @Column(nullable = false)
     String author;
+    @Column(nullable = false)
+    String bookImageURL;
 }

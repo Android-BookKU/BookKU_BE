@@ -20,6 +20,8 @@ public class Book extends Timestamped {
     String title;
     @Column(nullable = false)
     String author;
+    @Column(nullable = false)
+    String bookImageURL;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
@@ -31,6 +33,7 @@ public class Book extends Timestamped {
     public Book(BookReqDto bookReqDto, Member member) {
         this.title = bookReqDto.getTitle();
         this.author = bookReqDto.getAuthor();
+        this.bookImageURL=bookReqDto.getBookImageURL();
         this.member = member;
     }
 }

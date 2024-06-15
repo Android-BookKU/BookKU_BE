@@ -18,10 +18,13 @@ public class BookResDto {
     String title;
     @Column(nullable = false)
     String author;
+    @Column(nullable = false)
+    String bookImageURL;
 
     public BookResDto(Book book) {
         this.bookId = book.getBookId();
         this.title = book.getTitle();
         this.author = book.getAuthor();
+        this.bookImageURL=book.getBookImageURL();
     }
 }
