@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @Entity
 @NoArgsConstructor
@@ -22,6 +24,9 @@ public class Book extends Timestamped {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "memberId")
     private Member member;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Memo> memos;
 
     public Book(BookReqDto bookReqDto, Member member) {
         this.title = bookReqDto.getTitle();

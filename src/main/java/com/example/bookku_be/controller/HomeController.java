@@ -20,4 +20,10 @@ public class HomeController {
 
         return homeService.getRecentBook(userDetails);
     }
+
+    @GetMapping("/books/memo")
+    public GlobalResDto<?> getBooksOrderByLatestMemo(@AuthenticationPrincipal UserDetailsImpl userDetails){
+
+        return homeService.getBooksOrderByLatestMemo(userDetails);
+    }
 }

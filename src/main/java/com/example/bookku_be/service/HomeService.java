@@ -28,4 +28,15 @@ public class HomeService {
 
         return GlobalResDto.success(bookResDtoList, "success read books");
     }
+
+    @Transactional
+    public GlobalResDto<?> getBooksOrderByLatestMemo(UserDetailsImpl userDetails) {
+        Member member = userDetails.getMember();
+        List<Book> bookList = bookRepository.findBooksByMemberOrderByLatestMemo(member);
+
+        List<BookResDto> bookResDtoList = bookList.stream()
+                .map(BookResDto::new).toList();
+
+        return GlobalResDto.success(bookResDtoList, "success read books");
+    }
 }
