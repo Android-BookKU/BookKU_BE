@@ -1,6 +1,7 @@
 package com.example.bookku_be.controller;
 
 import com.example.bookku_be.dto.ReqDto.LoginReqDto;
+import com.example.bookku_be.dto.ReqDto.SignReqDto;
 import com.example.bookku_be.dto.ResDto.GlobalResDto;
 import com.example.bookku_be.service.LoginService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,9 +16,9 @@ public class LoginController {
     private final LoginService loginService;
 
     @PostMapping("/signup")
-    public GlobalResDto<?> SignUp(@RequestBody LoginReqDto loginReqDto) {
+    public GlobalResDto<?> SignUp(@RequestBody SignReqDto signReqDto) {
 
-        return loginService.signUp(loginReqDto);
+        return loginService.signUp(signReqDto);
     }
 
     @PostMapping("/login")

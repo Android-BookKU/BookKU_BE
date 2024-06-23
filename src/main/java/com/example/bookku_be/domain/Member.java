@@ -1,6 +1,7 @@
 package com.example.bookku_be.domain;
 
 import com.example.bookku_be.dto.ReqDto.LoginReqDto;
+import com.example.bookku_be.dto.ReqDto.SignReqDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,8 +22,8 @@ public class Member {
     @Column(nullable = false)
     private String pw;
 
-    public Member(LoginReqDto loginReqDto){
-        this.email = loginReqDto.getEmail();
-        this.pw = loginReqDto.getPw();
+    public Member(SignReqDto signReqDto){
+        this.email = signReqDto.getEmail();
+        this.pw = signReqDto.getPw();
     }
 }

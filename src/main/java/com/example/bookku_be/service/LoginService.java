@@ -3,6 +3,7 @@ package com.example.bookku_be.service;
 import com.example.bookku_be.domain.Member;
 import com.example.bookku_be.domain.RefreshToken;
 import com.example.bookku_be.dto.ReqDto.LoginReqDto;
+import com.example.bookku_be.dto.ReqDto.SignReqDto;
 import com.example.bookku_be.dto.ResDto.GlobalResDto;
 import com.example.bookku_be.exception.CustomException;
 import com.example.bookku_be.exception.ErrorCode;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -28,16 +30,20 @@ public class LoginService {
 
 
     @Transactional
-    public GlobalResDto<?> signUp(LoginReqDto loginReqDto) {
+    public GlobalResDto<?> signUp(SignReqDto signReqDto) {
         // 이메일 중복 확인
-        if(memberRepository.findByEmail(loginReqDto.getEmail()).isPresent()) {
+        if(memberRepository.findByEmail(signReqDto.getEmail()).isPresent()) {
             throw new CustomException(ErrorCode.ALREADY_HAVE_ID);
+        }
+        //비번과 비번확인 같은지 확인
+        if(!Objects.equals(signReqDto.getPw(), signReqDto.getPwConfirm())){
+            throw new CustomException(ErrorCode.NOT_MATCH_CONFIRM);
         }
 
         // 비밀번호 암호화
-        loginReqDto.setEncodePwd(passwordEncoder.encode(loginReqDto.getPw()));
+        signReqDto.setEncodePwd(passwordEncoder.encode(signReqDto.getPw()));
 
-        Member member = new Member(loginReqDto);
+        Member member = new Member(signReqDto);
         memberRepository.save(member);
 
         return GlobalResDto.success(null, "success signup");

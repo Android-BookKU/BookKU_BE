@@ -8,10 +8,17 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginReqDto {
+public class SignReqDto {
 
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private String pw;
+    @Column(nullable = false)
+    private String pwConfirm;
+
+    public void setEncodePwd(String encodePwd) {
+
+        this.pw = encodePwd;
+    }
 }
